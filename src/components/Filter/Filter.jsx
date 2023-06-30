@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import { NotificationMessage } from 'components/NotificationMessage/NotificationMessage';
 import { FilterSection } from './Filter.styled';
 
@@ -16,4 +17,12 @@ export const Filter = ({ contacts: { filter, contacts }, onChangeFilter }) => {
   ) : (
     <NotificationMessage />
   );
+};
+
+Filter.propTypes = {
+  contacts: PropTypes.shape({
+    filter: PropTypes.string.isRequired,
+    contacts: PropTypes.array.isRequired,
+  }).isRequired,
+  onChangeFilter: PropTypes.func.isRequired,
 };

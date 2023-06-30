@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import { Component } from 'react';
 import { nanoid } from 'nanoid';
 import { Form } from './ContactForm.styled';
@@ -58,7 +59,7 @@ export class ContactForm extends Component {
             title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
             required
           />
-          <label htmlFor="number" >Number</label>
+          <label htmlFor="number">Number</label>
           <input
             id="number"
             type="tel"
@@ -75,3 +76,8 @@ export class ContactForm extends Component {
     );
   }
 }
+
+ContactForm.propTypes = {
+  contacts: PropTypes.array.isRequired,
+  onAddContact: PropTypes.func.isRequired,
+};
