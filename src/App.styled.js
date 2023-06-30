@@ -5,7 +5,6 @@ margin: 0 auto;
 padding: 30px;
 
 h1, h2 {
-text-align: center;
 margin-bottom: 20px;
 }
 `
