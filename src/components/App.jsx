@@ -2,14 +2,11 @@ import { Component } from 'react';
 import { ContactForm } from './ContactForm/ConctactForm';
 import { Filter } from './Filter/Filter';
 import { ContactList } from './ContactList/ContactList';
+import { Wrapper } from 'App.styled';
+import { NotificationMessage } from './NotificationMessage/NotificationMessage';
 export class App extends Component {
   state = {
-    contacts: [
-      { id: 'id-1', name: 'Rosie Simpson', number: '459-12-56' },
-      { id: 'id-2', name: 'Hermione Kline', number: '443-89-12' },
-      { id: 'id-3', name: 'Eden Clements', number: '645-17-79' },
-      { id: 'id-4', name: 'Annie Copeland', number: '227-91-26' },
-    ],
+    contacts: [],
     filter: '',
   };
 
@@ -28,9 +25,9 @@ export class App extends Component {
 
   deleteContact = contactId => {
     this.setState(prevState => ({
-      contacts: prevState.contacts.filter(contact => contact.id !== contactId)
-    }))
-  }
+      contacts: prevState.contacts.filter(contact => contact.id !== contactId),
+    }));
+  };
 
   render() {
     const { contacts, filter } = this.state;
@@ -38,18 +35,27 @@ export class App extends Component {
       contact.name.toLowerCase().includes(filter.toLowerCase())
     );
     return (
-      <div>
+      <Wrapper>
         <h1>Phonebook</h1>
 
         <ContactForm
           contacts={this.state.contacts}
           onAddContact={this.handleAddContact}
         />
+        
         <h2>Contacts</h2>
-
-        <Filter contacts={this.state} onChangeFilter={this.changeFilter} />
-        <ContactList filteredContacts={filteredContacts} deleteContact={ this.deleteContact} />
-      </div>
+        {this.state.contacts.length !== 0 ? (
+          <>
+            <Filter contacts={this.state} onChangeFilter={this.changeFilter} />
+            <ContactList
+              filteredContacts={filteredContacts}
+              deleteContact={this.deleteContact}
+            />
+          </>
+        ) : (
+          <NotificationMessage />
+        )}
+      </Wrapper>
     );
   }
 }
